@@ -5,7 +5,6 @@ import 'moment/locale/id';
 
 function NoteItemBody({ title, body, createdAt }) {
   return (
-  // eslint-disable-next-line react/jsx-filename-extension
     <div className="note-item__content">
       <h3 className="note-item__title">{title}</h3>
       <p className="note-item__date">{showFormattedDate(createdAt)}</p>

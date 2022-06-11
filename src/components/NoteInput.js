@@ -7,6 +7,7 @@ class NoteInput extends React.Component {
     this.state = {
       title: '',
       body: '',
+      charCount: 50,
     };
 
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
@@ -15,9 +16,12 @@ class NoteInput extends React.Component {
   }
 
   onTitleChangeEventHandler(event) {
+    const { value, maxLength } = event.target;
+    const message = value.slice(0, maxLength);
     this.setState((prevState) => ({
       ...prevState,
       title: event.target.value,
+      charCount: message,
     }));
   }
 
@@ -37,13 +41,15 @@ class NoteInput extends React.Component {
     return (
       <form className="note-input" onSubmit={this.onSubmitEventHandler}>
         <p className="note-input__title__char-limit">
-          Sisa karakter:50
+          Sisa karakter:
+          {this.state.charCount}
         </p>
         <input
           className="note-input__title"
           type="text"
           placeholder="Ini adalah judul ..."
           value={this.state.title}
+          maxLength="50"
           onChange={this.onTitleChangeEventHandler}
           required
         />
