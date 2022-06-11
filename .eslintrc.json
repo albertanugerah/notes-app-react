@@ -19,6 +19,7 @@
   ],
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "react/destructuring-assignment": "off",
     "react/prop-types": 0,
     "react/jsx-filename-extension": [
       1,

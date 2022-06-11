@@ -3,19 +3,26 @@ import NoteItem from './NoteItem';
 
 function NoteList({ notes, onDelete, onArchive }) {
   return (
-    <div className="notes-list">
-      {
-                notes.map((note) => (
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  <NoteItem
-                    key={note.id}
-                    onDelete={onDelete}
-                    onArchive={onArchive}
-                    {...note}
-                  />
-                ))
-            }
-    </div>
+    notes.length !== 0
+      ? (
+        <div className="notes-list">
+          {
+
+                        notes.map((note) => ((
+                          <NoteItem
+                            key={note.id}
+                            onDelete={onDelete}
+                            onArchive={onArchive}
+                            {...note}
+                          />
+                        )
+
+                        ))
+
+                    }
+        </div>
+      )
+      : <p className="notes-list__empty-message">Tidak ada catatan</p>
   );
 }
 
