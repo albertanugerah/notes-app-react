@@ -2,6 +2,7 @@ import React from 'react';
 import NoteList from './NoteList';
 import { getInitialData } from '../utils';
 import NoteHeader from './NoteHeader';
+import NoteInput from './NoteInput';
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -14,17 +15,29 @@ class NoteApp extends React.Component {
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
   }
 
   onDeleteHandler(id) {
     // eslint-disable-next-line react/no-access-state-in-setstate
-    const notes = this.state.notes.filter((note) => {
-      if (note.id) {
-        return note.id !== id;
-      }
-      return 'tidak ada catatan';
-    });
+    const notes = this.state.notes.filter((note) => (note.id !== id));
     this.setState({ notes });
+  }
+
+  onAddNoteHandler({ title, body }) {
+    const dates = new Date();
+    this.setState((prevState) => ({
+      notes: [
+        ...prevState.notes,
+        {
+          id: `${+dates}`,
+          title,
+          body,
+          archive: false,
+          createdAt: dates.toString(),
+        },
+      ],
+    }));
   }
 
   onSearchHandler(event) {
@@ -38,7 +51,7 @@ class NoteApp extends React.Component {
       <>
         <NoteHeader keyword={this.state.keyword} onSearch={this.onSearchHandler} />
         <div className="note-app__body">
-
+          <NoteInput addNote={this.onAddNoteHandler} />
           <h2>Catatan Aktif</h2>
           <NoteList notes={this.state.notes} onDelete={this.onDeleteHandler} />
         </div>
