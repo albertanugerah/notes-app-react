@@ -40,16 +40,18 @@ class NoteApp extends React.Component {
     }));
   }
 
-  onSearchHandler(event) {
-    this.setState({
-      keyword: event.target.value,
-    });
+  onSearchHandler(keyword) {
+    this.setState((prevState) => ({
+      ...prevState,
+      notes: prevState.notes.filter((note) => note.title.toLowerCase()
+        .includes(keyword.toLowerCase())),
+    }));
   }
 
   render() {
     return (
       <>
-        <NoteHeader keyword={this.state.keyword} onSearch={this.onSearchHandler} />
+        <NoteHeader onSearch={this.onSearchHandler} />
         <div className="note-app__body">
           <NoteInput addNote={this.onAddNoteHandler} />
           <h2>Catatan Aktif</h2>

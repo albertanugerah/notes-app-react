@@ -1,11 +1,13 @@
 import React from 'react';
 import NoteInputSearch from './NoteInputSearch';
 
-function NoteHeader({ keyword }) {
+function NoteHeader({ onSearch }) {
   return (
     <div className="note-app__header">
       <h1>Notes</h1>
-      <NoteInputSearch onSearch={keyword} />
+      <form>
+        <NoteInputSearch onSearch={onSearch} />
+      </form>
     </div>
   );
 }
