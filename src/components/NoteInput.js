@@ -16,12 +16,10 @@ class NoteInput extends React.Component {
   }
 
   onTitleChangeEventHandler(event) {
-    const { value, maxLength } = event.target;
-    const message = value.slice(0, maxLength);
     this.setState((prevState) => ({
       ...prevState,
       title: event.target.value,
-      charCount: message,
+      charCount: Math.max(0, 50 - event.target.value.length),
     }));
   }
 
